@@ -1,0 +1,102 @@
+
+<app-banner class="eliminar" texto1="Registro  ¿Ya tienes cuenta?" texto2="Inicia Sesión!" texto3="" ></app-banner>
+
+<div class="container-fluid">
+  <div class="row justify-content-center ">
+    <div class="col-auto p-0 login">
+      <div class="logo text-center">
+        <h1 class="font-weight-bold text-white ">Registro</h1>
+      </div>
+
+      
+
+    <h2 class="text-center mt-5  p-2" >Crear una cuenta ¿Ya tienes una? <span class="font-weight-bold" >  <a href="">  Inicia Sesión </a>   </span> </h2>
+
+    <div class="form-row mb-3 mr-2 ml-2 mt-4 ">
+   
+        <label for="nombre">Ingrese nombre completo</label> 
+        <div class="input-group col-12 ">
+           
+          <div class="input-group-prepend">
+            <span class="input-group-text morado" id="inputGroup-sizing-default"
+              ><i class="fas fa-users"></i
+            ></span>
+          </div>
+          
+          <input
+          placeholder="Ingrese su nombre"
+            type="text"
+            id="nombre"
+            name="nombre"
+            class="form-control"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+    </div>
+    <div class="form-row mb-3 mr-2 ml-2 ">
+        <label for="nombre">Ingrese email</label> 
+        <div class="input-group col-12">
+          <div class="input-group-prepend">
+            <span class="input-group-text morado" id="inputGroup-sizing-default"
+              ><i class="fas fa-envelope-square"></i></span>
+          </div>
+          <input
+          placeholder="Ingrese su email"
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            aria-label="Default"
+            aria-describedby="inputGroup-sizing-default"
+          />
+        </div>
+    </div>
+    <div class="form-row  mb-3 mr-2 ml-2  ">
+        <label for="nombre">Ingrese contraseña</label> 
+        <div class="input-group col-12">
+            <div class="input-group-prepend">
+              <span class="input-group-text morado" id="inputGroup-sizing-default"
+                ><i class="fas fa-key"></i
+              ></span>
+            </div>
+            <input
+            placeholder="Ingrese password"
+              type="password"
+              id="password"
+              name="password"
+              class="form-control"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+        </div>
+        <div class="form-row  mb-5 mr-2 ml-2  ">
+            <label for="nombre">Repita contraseña</label>
+          <div class="input-group col-12">
+            <div class="input-group-prepend">
+              <span class="input-group-text morado" id="inputGroup-sizing-default"
+                ><i class="fas fa-key"></i
+              ></span>
+            </div>
+            <input
+            placeholder="Repita su password"
+              type="password2"
+              id="password2"
+              name="password2"
+              class="form-control"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+        </div>
+        
+
+      
+      <button  type="submit" class="btn btn-primary btn-block  " > Enviar  </button>
+
+      <p class="text-center mt-3">¿Tienes cuenta? <span> <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="as">Inicia sesión! </a>  </span> </p>
+
+    </div>
+  </div>
+</div>

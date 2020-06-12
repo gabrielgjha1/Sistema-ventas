@@ -1,0 +1,20 @@
+.color{
+   background-color: #4527A0
+}
+
+a{
+   color: white !important;
+   
+}
+
+a:hover{
+   color: black !important;
+   width: 100%;
+  
+   
+}
+.elementos{
+   /*Modifica lo que quieras*/
+   background-color:  #757575 !important;
+          
+}

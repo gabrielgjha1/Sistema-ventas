@@ -1,0 +1,22 @@
+img{
+    min-width:300px ;
+    min-height: 300px ;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
+}
+img{
+    min-width:300px ;
+    min-height: 300px ;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
+}
+.bordes{
+    padding: 10px;
+    border: rgb(192, 187, 187) 5px dashed;
+}
+
+.card{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}

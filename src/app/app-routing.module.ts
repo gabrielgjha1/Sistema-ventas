@@ -1,8 +1,28 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ArticulosComponent } from './pages/articulos/articulos.component';
+import { PerfilComponent } from './pages/perfil/perfil.component';
+import { AgregarProductosComponent } from './pages/agregar-productos/agregar-productos.component';
+import { ZapatosComponent } from './pages/zapatos/zapatos.component';
+import { RopaComponent } from './pages/ropa/ropa.component';
+import { ConsolasComponent } from './pages/consolas/consolas.component';
+import { LoginComponent } from './login/login/login.component';
+import { RegistroComponent } from './login/registro/registro.component';
 
 
-const routes: Routes = [];
+
+const routes: Routes = [
+  {path:'',component:ArticulosComponent},
+  {path:'articulos',component:ArticulosComponent},
+  {path:'zapatos',component:ZapatosComponent},
+  {path:'ropa',component:RopaComponent},
+  {path:'consolas',component:ConsolasComponent},
+  {path:'perfil',component:PerfilComponent},
+  {path:'agproductos',component:AgregarProductosComponent},
+  {path:'login',component:LoginComponent},
+  {path:'registro',component:RegistroComponent},
+  {path:'**',pathMatch: 'full',redirectTo:'articulos'},
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

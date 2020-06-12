@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg navbar-light color ">
+    <nav class="navbar navbar-light bg-light">
+     
+          <img src="../../../assets/imagenes/unnamed.png" width="40" height="30" alt="">
+       
+      </nav>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+      <div class="  ">
+        <ul class="navbar-nav mr-auto  mr-5 ">
+          <li class="nav-item  ">
+            <a class="nav-link text-white" [routerLink]="['/articulos']" routerLinkActive="text-danger"  href="#"> <i class="fas fa-home"></i> Inicio <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fas fa-store"></i>  Articulos
+            </a>
+            <div class="dropdown-menu elementos animated animate__fadeInDown " aria-labelledby="navbarDropdownMenuLink ">
+              <a class="dropdown-item text-white " [routerLink]="['/zapatos']" routerLinkActive="router-link-active"  href="#">Zapatos</a>
+              <a class="dropdown-item text-white " [routerLink]="['/consolas']" routerLinkActive="router-link-active"  href="#">Consolas</a>
+              <a class="dropdown-item text-white " [routerLink]="['/ropa']" routerLinkActive="router-link-active"  href="#">Ropa</a>
+            </div>
+          </li>
+          
+            <li class="nav-item text-white">
+              <a class="nav-link text-white" [routerLink]="['/agproductos']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-plus"></i> Agregar productos</a>
+            </li>
+
+            
+            <li class="nav-item text-white ">
+              <a class="nav-link text-white" [routerLink]="['/perfil']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-user-tie"></i> Perfil</a>
+            </li>
+            <li class="nav-item text-white ">
+              <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-registered mr-1"></i>Login/registro</a>
+            </li>
+            <li class="nav-item text-white">
+              <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-cart-arrow-down"></i>Carrito</a>
+            </li>
+            <li class="nav-item text-white">
+              <a class="nav-link text-white" [routerLink]="['/agproductos']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-sign-out-alt"></i> Salir</a>
+            </li>
+         
+            <div class="ml-5">
+
+              <form class="form-inline ">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+            
+          
+        </ul>
+      </div>
+
+    </div>
+  </nav>
