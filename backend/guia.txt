@@ -1,0 +1,290 @@
+// lo primero que se hace es exportar la libreria dentro de la carpeta uploads
+
+const fileUpload = require('express-fileupload');
+
+// luego antes del app.put se coloca 
+app.use(fileUpload());
+
+//todo se traba dentro de un app.put
+////
+app.put('/',(req,res)=>{
+
+    res.status(200).json({
+
+        status:true,
+        mensaje:"funciona"
+
+    });
+
+});
+///////
+
+/// ahora se tiene que verificar si lo que se ingreso es de tipo archivo, tambien verifica si no se a ingresado una imagen 
+// todo va adentro del app.put
+
+
+app.put('/',(req,res)=>{
+
+    // verifica si lo que mando el usuario es de tipo archivo. si no envio nada tambien entra
+    if (!req.files){
+        res.status(400).json({
+
+            status:false,
+            mensaje:"Error, no inserto un archivo",
+            err
+    
+        });
+    }
+
+    res.status(200).json({
+
+        status:true,
+        mensaje:"funciona"
+
+    });
+
+});
+    
+/////
+//////AHora se procede a conseguir la  extencion de nuestro archivo
+
+
+     if (!req.files){
+        res.status(400).json({
+
+            status:false,
+            mensaje:"Error, no inserto un archivo",
+            err
+    
+        });
+    }
+
+    // se trae el archivo subido por el usuario
+    var archivo = req.files.img;
+    //se usa para guardar el nombre del archivo y la extencion
+    var nombreCortado = archivo.name.split('.');
+    //extencion del archivo
+    var extensionArchivo=nombreCortado[nombreCortado.length-1]
+
+    res.status(200).json({
+        status:true,
+        mensaje:"funciona",
+        nombreCortado,
+        extensionArchivo
+    });
+
+
+////////////
+
+/// luego de tener la extencion del archivo se debe validar que el usuario no ingreso una extencion invalida
+
+      // se trae el archivo subido por el usuario
+    var archivo = req.files.img;
+    //se usa para guardar el nombre del archivo y la extencion
+    var nombreCortado = archivo.name.split('.');
+    //extencion del archivo
+    var extensionArchivo=nombreCortado[nombreCortado.length-1]
+
+ // se crea un archivo con las extenciones permitidas
+    var extencionesValidas = ['png','jpg','gif','jpeg'];
+
+    // verifica si la extencion del archivo existe en el arrego, si no existe el valor es -1
+    if (extencionesValidas.indexOf( extensionArchivo )<0){
+        
+        return res.status(400).json({
+
+            status:false,
+            mensaje:"Error, EL formato del archivo no es valida",
+            
+    
+        });
+
+    }
+
+
+    ////////////////////////////
+
+    ////ahora se hacen algunas modificaciones  Al inicio del codigo se agrega tipo, id
+    //// El tipo y el id es para identificar donde debe guardarse la imagen
+    /// Esto funcionara para luego crear el nombre y saber donde ubicar la imagen
+//////////////////
+
+    app.put('/:tipo/:id',(req,res)=>{
+
+    var id = req.params.id;
+    var tipo = req.params.tipo;
+
+//////////////////
+
+///////////
+
+/// Ahora lo que sigue es crear las carpetas donde guardaremos las imagenes ingresadas por el usuario
+/// Para esto nos ubicamos en la raiz de nuestro backend y dentro crearemos una carpeta "uploads" 
+/// Dentro de esta carpetas crearemos una carpeta para cada tipo en este caso dentro la carpeta uploads
+/// colocamos zapatos ropas y consolas, en cada carpeta se guardara las imagenes que le corresponden
+
+/////////////
+
+/// luego de crea las carpetas se creara un nombre perzonalizado para la imagen  y se establecera la ruta
+
+///////
+
+
+    if (extencionesValidas.indexOf( extensionArchivo )<0){
+        
+        return res.status(400).json({
+
+            status:false,
+            mensaje:"Error, EL formato del archivo no es valida",
+        });
+
+    }
+
+    // se crea el nombre del archivo, lleva el id,3 numeors y la extension
+    // 123123123-123.png
+    var nombreArchivo =  `${id}-${new Date().getMilliseconds()}.${extensionArchivo}`;
+
+    /// se  crea la ruta donde se enviara la imagen
+    var path = `./uploads/${tipo}/${nombreArchivo}`
+
+///////
+
+
+/// luego de crear la ruta con el nombre del archivo tenemos que mover la imagen subida por el usuario
+/// a las carpeta que creamos 
+
+//////////////////
+
+/// mueve la imagen que envio el usuario a la ruta que establecimos con el nombre personalizado que creamos
+archivo.mv(path,err=>{
+
+        if (err){
+            return res.status(500).json({
+
+                status:false,
+                mensaje:"Error al mover el archivo",
+            });
+        }
+
+    /// movimos la respuesta adentro del if 
+        res.status(200).json({
+    
+            status:true,
+            mensaje:"funciona",
+            nombreCortado,
+            extensionArchivo
+        });
+        
+    });
+
+//////////////////
+
+
+
+/////////codigo final 
+
+
+
+
+
+
+var express = require('express');
+//libreria
+const fileUpload = require('express-fileupload');
+var app = express();
+//necesario de la libreria
+app.use(fileUpload());
+
+app.put('/:tipo/:id',(req,res)=>{
+
+    var id = req.params.id;
+    var tipo = req.params.tipo;
+
+    var TiposValidos = ['zapatos','consolas','ropas'];
+    if (TiposValidos.indexOf (tipo)<0){
+
+        if (!req.files){
+            return res.status(400).json({
+     
+                 status:false,
+                 mensaje:"Error, no es un tipo valido",
+                
+     
+             });
+         }
+    }
+
+    // validar si lo que envio el usuario es un archivo
+    if (!req.files){
+       return res.status(400).json({
+
+            status:false,
+            mensaje:"Error, no inserto un archivo",
+           
+
+        });
+    }
+
+    // se trae el archivo subido por el usuario
+    var archivo = req.files.img;
+    //se usa para guardar el nombre del archivo y la extencion
+    var nombreCortado = archivo.name.split('.');
+    //extencion del archivo
+    var extensionArchivo=nombreCortado[nombreCortado.length-1];
+
+
+    // se crea un archivo con las extenciones permitidas
+    var extencionesValidas = ['png','jpg','gif','jpeg'];
+
+    // verifica si la extencion del archivo existe en el arrego, si no existe el valor es -1
+    if (extencionesValidas.indexOf( extensionArchivo )<0){
+        
+        return res.status(400).json({
+
+            status:false,
+            mensaje:"Error, EL formato del archivo no es valida",
+        });
+
+    }
+
+    // se crea el nombre del archivo, lleva el id,3 numeors y la extension
+    // 123123123-123.png
+    var nombreArchivo =  ` ${id}-${new Date().getMilliseconds()}.${extensionArchivo}  `;
+    
+    /// se  crea la ruta donde se enviara la imagen
+    var path = `./uploads/${tipo}/${nombreArchivo}`
+    console.log(path)
+    archivo.mv(path,err=>{
+
+        if (err){
+            return res.status(500).json({
+
+                status:false,
+                mensaje:"Error al mover el archivo",
+            });
+        }
+
+        res.status(200).json({
+    
+            status:true,
+            mensaje:"funciona",
+            nombreCortado,
+            extensionArchivo
+        });
+
+    });
+
+
+
+});
+
+
+
+module.exports=app;
+
+
+
+
+
+////////////
+

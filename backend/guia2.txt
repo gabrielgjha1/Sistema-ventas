@@ -1,0 +1,116 @@
+/// luego de mover el archivo se crea una funcion en la cual vamos a trabajar
+/// hasta este punto guardamos la imagen en su carpeta ya sea zpaato consolas o ropas
+/// pero ahora vamos asignar esa imagen a donde pertenece.
+/// si creamos una zapatilla converse, con la funcion le agregariamos la imagen a esa zapatilla que creamos
+//////////
+
+    archivo.mv(path,err=>{
+
+        if (err){
+            return res.status(500).json({
+
+                status:false,
+                mensaje:"Error al mover el archivo",
+            });
+        }
+
+        //crear funcion afuera del app.put
+        // se le envia el tipo el id, el path y la respuesta
+        subirPorTipo(tipo,id,path,res);
+
+
+        /*Se comenta la respuesta
+        res.status(200).json({
+    
+            status:true,
+            mensaje:"funciona",
+            nombreCortado,
+            extensionArchivo
+        });
+
+        */ 
+
+//////////
+
+/// ahora crea las validaciones y se exportan los modelos para trabajar
+/// en cada if asignaremos la imagen donde pertenece
+
+/////////
+
+///exportar modelos al inicio del archivo
+// exportar modelos
+var consola = require('../models/consolas');
+var zapato = require('../models/zapatos');
+var ropa = require('../models/ropa');
+
+function subirPorTipo(tipo,id,path,res){
+
+    if (tipo ==='zapatos'){
+
+    }
+
+    if (tipo==='consolas'){
+
+    }
+
+    if (tipo==='ropas'){
+        
+    }
+
+}
+
+////////////
+
+///Se importa la libreria para manejar archivos 
+
+
+var fs = require('fs');
+
+////////////
+
+    if (tipo ==='zapatos'){
+
+        // funcion de mongoose para asignar una imagen a un zapato
+        zapato.findById(id,(err,zapatos)=>{
+
+            //se crea la ruta con el nombre de la imagen
+            // si la imagen existe se elimina despues par agregar otra
+            var pathViejo='./uploads/zapatos/'+zapato.img
+
+            //si la imagen existe se elimina paras despues actualizarla
+            if (fs.existsSync(pathViejo)){
+                fs.unlinkSync(pathViejo)
+            }
+
+        });
+
+///////////
+
+
+///Ahora vamos a asignar la imagen donde pertence
+/// lo primero que hacemos es guardar el nombre y luego guardarlo en la base de datos
+
+////////
+
+//la imagen de nuestro zapaos que trajimos con el findbyid
+            
+            if (fs.existsSync(pathViejo)){
+                fs.unlinkSync(pathViejo)
+            }
+
+            //le asignamos el nombre personalizado que creamos y que esta en uploads zapatos
+            zapatos.img = nombreArchivo;
+            // luego lo guardamos 
+            zapatos.save((err,zapatos)=>{
+
+               return res.status(200).json({
+    
+                    status:true,
+                    mensaje:"funciona",
+                    nombreCortado,
+                    extensionArchivo
+                });
+
+            });
+
+///////

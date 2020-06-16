@@ -10,10 +10,17 @@ var app = express();
 var bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
-
 // parse application/json
 app.use(bodyParser.json())
 
+
+// exportar rutas
+var appRoute= require('./routes/app');
+var ropaRoute= require('./routes/ropa');
+var zapatosRoute= require('./routes/zapatos');
+var consolasRoute= require('./routes/consola');
+var uploadsRoute = require('./routes/uploads');
+var imagenesRoute = require('./routes/imagenes');
 
 
 //permitir acceso a los datos
@@ -23,6 +30,7 @@ app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Methods","POST,GET,PUT,DELETE,OPTIONS")
     next();
   });
+
 
   //conexion a la base de datos
   mongoose.connection.openUri('mongodb://localhost:27017/ventas', {
@@ -35,15 +43,14 @@ app.use(function(req, res, next) {
     console.log('Database conection: \x1b[32m%s\x1b[0m', 'ONLINE');
 })
 
+
 //rutas 
-app.get('/',(req,res)=>{
-
-    res.status(200).json({
-        status:true,
-        mensaje:"hola"
-    })
-
-});
+app.use('/',appRoute);
+app.use('/ropa',ropaRoute);
+app.use('/zapatos',zapatosRoute);
+app.use('/upload',uploadsRoute);
+app.use('/consolas',consolasRoute);
+app.use('/img',imagenesRoute);
 
 //puerto del servidor
 app.listen(port, function(){
