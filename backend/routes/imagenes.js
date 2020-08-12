@@ -14,8 +14,9 @@ app.get('/:tipo/:img',(req,res)=>{
         res.sendFile(pathImagen);
     }
     else {
+        console.log(pathImagen)
         var pathNoImagen = path.resolve(__dirname,'../assets/descarga.png');
-        res.sendFile(pathImagen);
+        res.sendFile(pathNoImagen);
     }
 
   

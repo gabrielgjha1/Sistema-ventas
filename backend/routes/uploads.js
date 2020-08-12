@@ -44,6 +44,7 @@ app.put('/:tipo/:id',(req,res)=>{
 
     // se trae el archivo subido por el usuario
     var archivo = req.files.img;
+    console.log(archivo);
     //se usa para guardar el nombre del archivo y la extencion
     var nombreCortado = archivo.name.split('.');
     //extencion del archivo
@@ -129,6 +130,7 @@ function subirPorTipo(tipo,id,nombreArchivo,res){
         });
 
     }
+    
 
     if (tipo==='ropas'){
 

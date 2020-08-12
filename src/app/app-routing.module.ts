@@ -8,7 +8,8 @@ import { RopaComponent } from './pages/ropa/ropa.component';
 import { ConsolasComponent } from './pages/consolas/consolas.component';
 import { LoginComponent } from './login/login/login.component';
 import { RegistroComponent } from './login/registro/registro.component';
-
+import { EditarProductosComponent } from './pages/editar-productos/editar-productos.component';
+import { AdminGuard } from './services/guards/admin.guard';
 
 
 const routes: Routes = [
@@ -17,10 +18,11 @@ const routes: Routes = [
   {path:'zapatos',component:ZapatosComponent},
   {path:'ropa',component:RopaComponent},
   {path:'consolas',component:ConsolasComponent},
-  {path:'perfil',component:PerfilComponent},
-  {path:'agproductos',component:AgregarProductosComponent},
+  {path:'perfil',component:PerfilComponent,canActivate:[AdminGuard]},
+  {path:'agproductos',component:AgregarProductosComponent,canActivate:[AdminGuard]},
   {path:'login',component:LoginComponent},
   {path:'registro',component:RegistroComponent},
+  {path:'eproductos',component:EditarProductosComponent,canActivate:[AdminGuard]},
   {path:'**',pathMatch: 'full',redirectTo:'articulos'},
 ];
 

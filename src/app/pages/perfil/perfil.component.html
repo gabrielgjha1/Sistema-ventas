@@ -1,1 +1,79 @@
-<p>perfil works!</p>
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+      
+        <th scope="col">Nombre</th>
+        <th scope="col">Rol</th>
+        <th scope="col">Email</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of usuario">
+        <td>{{item.nombre}}</td>
+        <td>{{item.rol}}</td>
+        <td>{{item.email}}</td>
+        <td> 
+            <button class="btn btn-success btn-sm mr-2" (click)="traerDatos(item._id)"  data-toggle="modal" data-target="#exampleModal"  ><i class="fas fa-edit"></i></button>
+            <button class="btn btn-danger btn-sm"  (click)="EliminarUsuarios(item._id)"  ><i class="fas fa-trash"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center" id="exampleModalLabel">Actualizar usuario</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="container">
+              <div class="row">
+                
+                
+                <div class="col-12">
+
+                    <form ngNativeValidate  [formGroup]="form" (ngSubmit)="Actualizar()" >
+
+                        <div class="form-group">
+                          <label for="nombre">Nombre: </label>
+                          <input required type="text"  formControlName="nombre"    class="form-control" name="nombre" id="nombre" >
+                        </div>
+
+                        <label class="my-1 mr-2" for="rol">Rol</label>
+                        <select formControlName="rol" required name="rol"  class="custom-select my-1 mr-sm-2" id="rol">
+                            <option selected>Selecciona</option>
+                            <option value="USER_ROLE">USER_ROLE</option>
+                            <option value="ADMIN_ROLE">ADMIN_ROLE</option>
+                      
+                        </select>
+                        
+                        <div class="form-group">
+                            <label for="email">Email: </label>
+                            <input  type="email" formControlName="email" value="{{emails}}"   required  name="email" class="form-control" id="email" >
+                          </div>
+
+                   
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                      </div>
+
+                    </form>
+                </div>
+ 
+              </div>
+
+            </div>
+          </div>
+    
+      </div>
+    </div>
+  </div>

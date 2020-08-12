@@ -8,6 +8,7 @@ var RopaSchema = new Schema({
     codigo:{type:String,required:[true,'El codigo es necesario']},
     precio:{type:Number,required:[true,'EL precio es necesario']},
     tallas:{type:Array,default:['S','M','L','XS']},
+    genero:{type:String,required:false},
     stock:{type:Array,required:true},
     img:{type:String,required:false}
 

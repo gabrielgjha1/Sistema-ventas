@@ -21,6 +21,8 @@ var zapatosRoute= require('./routes/zapatos');
 var consolasRoute= require('./routes/consola');
 var uploadsRoute = require('./routes/uploads');
 var imagenesRoute = require('./routes/imagenes');
+var usuariosRoutes = require('./routes/usuario');
+var loginRoutes = require('./routes/login');
 
 
 //permitir acceso a los datos
@@ -50,7 +52,10 @@ app.use('/ropa',ropaRoute);
 app.use('/zapatos',zapatosRoute);
 app.use('/upload',uploadsRoute);
 app.use('/consolas',consolasRoute);
+app.use('/usuarios',usuariosRoutes);
+app.use('/login',loginRoutes);
 app.use('/img',imagenesRoute);
+
 
 //puerto del servidor
 app.listen(port, function(){

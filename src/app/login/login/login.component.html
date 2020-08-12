@@ -1,59 +1,90 @@
-<app-banner class="eliminar" texto1="Inicia sesión ¿No tienes cuenta?" texto2="Registrate!" texto3="" ></app-banner>
 
-<div class="container-fluid mb-5">
-  <div class="row  justify-content-center ">
-    <div class="col-auto p-0 login">
-      <div class="logo text-center">
-        <h1 class="font-weight-bold text-white">Login</h1>
-      </div>
+<div *ngIf="Logeado">
+  <app-banner class="eliminar" texto1="Felicidades!! ya estas" texto2="Registrado!" texto3="" ></app-banner>
+</div>
 
-      <img
-        class="rounded mx-auto d-block"
-        src="../../../assets/imagenes/head-659651_640.png"
-        width="80"
-        height="80"
-        alt=""
-      />
+<div *ngIf="Logeado==false">
+  <app-banner class="eliminar" texto1="Inicia sesión ¿No tienes cuenta?" texto2="Registrate!" texto3="" ></app-banner>
 
-    <h2 class="text-center" >Ingrese sus credenciales</h2>
+  <div class="container-fluid mb-5">
+    <div class="row  justify-content-center ">
 
-      <div class="form-row p-5">
-        <div class="input-group col-12 mb-5">
-          <div class="input-group-prepend">
-            <span class="input-group-text morado" id="inputGroup-sizing-default"
-              ><i class="fas fa-users"></i
-            ></span>
-          </div>
-          <input
-          placeholder="Ingrese su email"
-            type="email"
-            class="form-control"
-            aria-label="Default"
-            name="email"
-            aria-describedby="inputGroup-sizing-default"
-          />
+      <form  ngNativeValidate  [formGroup]="form" (ngSubmit)="login()" >
+      <div class="col-auto p-0 login">
+        <div class="logo text-center">
+          <h1 class="font-weight-bold text-white">Login</h1>
         </div>
-
-        <div class="input-group col-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text morado" id="inputGroup-sizing-default"
-              ><i class="fas fa-key"></i
-            ></span>
+  
+        <img
+          class="rounded mx-auto d-block"
+          src="../../../assets/imagenes/head-659651_640.png"
+          width="80"
+          height="80"
+          alt=""
+        />
+  
+      <h2 class="text-center" >Ingrese sus credenciales</h2>
+  
+        <div class="form-row p-5">
+          <div class="input-group col-12 ">
+           
+  
+            <div class="input-group-prepend">
+              <span class="input-group-text morado" id="inputGroup-sizing-default"
+                ><i class="fas fa-users"></i
+              ></span>
+            </div>
+            <input
+              placeholder="Ingrese su email"
+              type="email"
+              class="form-control"
+              aria-label="Default"
+              name="email"
+              id="email"
+              aria-describedby="inputGroup-sizing-default"
+              formControlName="email"
+  
+            />
+         
+  
           </div>
-          <input
-          placeholder="Ingrese su contraseña"
-            type="password"
-            class="form-control"
-            aria-label="Default"
-            name="password"
-            aria-describedby="inputGroup-sizing-default"
-          />
+  
+          <div class="ml-1" *ngIf="email.invalid && (email.dirty || email.touched)">
+            <div class="small text-danger ">
+  
+              <span>Ingrese un email valido</span>
+  
+            </div>
+          </div>
+  
+          <div class="input-group col-12 mt-5">
+            <div class="input-group-prepend">
+              <span class="input-group-text morado" id="inputGroup-sizing-default"
+                ><i class="fas fa-key"></i
+              ></span>
+            </div>
+            <input
+            placeholder="Ingrese su contraseña"
+              type="password"
+              class="form-control"
+              aria-label="Default"
+              name="password"
+              aria-describedby= "inputGroup-sizing-default"
+              id="password"
+              formControlName="password"
+            />
+          </div>
+        
         </div>
+    
+        <button type="submit" class="btn btn-primary btn-block " > Enviar  </button>
+  
+        <p class="text-center mt-3">¿No tienes cuenta? <span> <a [routerLink]="['/registro']" >Registrate! </a>  </span> </p>
+  
       </div>
-      <button type="submit" class="btn btn-primary btn-block " > Enviar  </button>
-
-      <p class="text-center mt-3">¿No tienes cuenta? <span> <a [routerLink]="['/registro']" >Registrate! </a>  </span> </p>
-
+    </form>
     </div>
   </div>
+  
 </div>
+

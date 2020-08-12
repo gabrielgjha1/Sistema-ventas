@@ -1,0 +1,14 @@
+.bordes{
+    padding: 10px;
+    border: rgb(192, 187, 187) 5px dashed;
+}
+input{
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+input:focus{
+    border-bottom: solid 1.5px blue;
+}
+.formulario{
+    padding: 15px;
+    background: rgb(220, 223, 224);
+}

@@ -1,0 +1,191 @@
+<div class="row mb-5 bordes ">
+    <div class="col ">
+        <h1 class="text-center  text-uppercase" > Editar <span  class="animate__animated animate__backInDown" > {{titulo}}</span>   </h1>   
+     </div>
+</div>
+
+<label class="my-1 mr-2 mt-3 " for="seleccion">Preference</label>
+<select (change)="CambioProducto($event)" class="custom-select my-1 mr-sm-2 mb-4" id="seleccion" name="seleccion">
+  <option selected>Seleccionar</option>
+  <option value="Consolas">Consolas</option>
+  <option value="Zapatos">Zapatos</option>
+  <option value="Ropas">Ropas</option>
+</select>
+
+
+<!-- consolas -->
+<table class="table animate__animated animate__backInDown" *ngIf="Bconsolal">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of consolas">
+        <th scope="row">{{item.codigo}}</th>
+        <td>{{item.nombre}}</td>
+        <td>{{item.precio}}$</td>
+        <td>{{item.stock}}</td>
+      
+        <td> <img src="{{item.img | imagenTraer:'consolas'}}" width="25px" height="25px" alt=""></td>
+        <td> 
+            <button (click)="EditarConsolas(item.nombre,item.precio,item.stock,item.img,item._id,'consolas')" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary mr-1 btn-sm" ><i class="far fa-edit"></i></button>
+            <button (click)="EliminarProducto(item._id,'consolas')" class="btn btn-danger btn-sm" ><i class="fas fa-trash-alt"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- zapatos -->
+
+  <table class="table animate__animated animate__backInDown" *ngIf="Bzapatol">
+    <thead class="thead-dark">
+
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Talla</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Editar</th>
+      </tr>
+
+    </thead>
+    <tbody>
+        
+        <tr *ngFor="let item of zapatos">
+            <th scope="row">{{item.codigo}}</th>
+            <td>{{item.nombre}}</td>
+            <td>{{item.precio}}$</td>
+            <td>{{item.tallas}}</td>
+            <td>{{item.stock}}</td>
+            <td> <img src="{{item.img | imagenTraer:'consolas'}}" width="25px" height="25px" alt=""></td>
+            <td>
+
+                <button (click)="EditarConsolas(item.nombre,item.precio,item.stock,item.img,item._id,'zapatos',item.tallas,item.codigo,item.genero)" class="btn btn-primary mr-1 btn-sm"  data-toggle="modal" data-target="#exampleModal"  ><i class="far fa-edit"></i></button>
+                <button (click)="EliminarProducto(item._id,'zapatos')"  class="btn btn-danger btn-sm" ><i class="fas fa-trash-alt"></i></button>
+          
+              </td>
+          </tr>
+
+    </tbody>
+  </table>
+
+  <!-- ropas -->
+
+  <table class="table animate__animated animate__backInDown" *ngIf="Bropal">
+
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Codigo</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Precio</th>
+        <th scope="col">Talla</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Imagen</th>
+        <th scope="col">Editar</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let item of ropa">
+            <th scope="row">{{item.codigo}}</th>
+            <td>{{item.nombre}}</td>
+            <td>{{item.precio}}$</td>
+            <td>{{item.tallas}}</td>
+            <td>{{item.stock}}</td>
+            <td> <img src="{{item.img | imagenTraer:'consolas'}}" width="25px" height="25px" alt=""></td>
+            <td> 
+                <button class="btn btn-primary mr-1 btn-sm" ><i class="far fa-edit"></i></button>
+                <button (click)="EliminarProducto(item._id,'ropas')" class="btn btn-danger btn-sm" ><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar Producto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body  ">
+        <form  #f="ngForm" ngNativeValidate (ngSubmit)="CambiarDatos(f)" >
+      
+        <div class="row">
+          <div class="col-12 text-center">
+            <h2>{{NombreP}}</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 text-center">
+            <img src="{{ImagenP | imagenTraer:'consolas'}}" alt="">
+          </div>
+        </div>
+          <div class="form-row mt-5">
+            <div class=" col-12 col-md-6  mb-3">
+              <label for="nombre">Nombre del producto</label>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="NombreP" name="nombre" value="{{NombreP}}"  required>
+            </div>
+            <div class="col-12 col-md-6">
+              <label for="precio">Precio Del producto</label>
+              <input type="number" class="form-control" id="precio"   [(ngModel)]="PrecioP" name="precio" value="{{PrecioP}}"  required>
+            </div>
+        </div>
+
+        <div class="form-row">
+          <div class=" col-12 col-md-12  mb-3">
+            <label for="stock">Cantidad disponible del producto</label>
+
+            <!-- Cantidad de consolas -->
+            <div *ngIf="Bconsolal" >
+              <input type="number"  class="form-control" id="stock"  [(ngModel)]="StockP" name="stock" value="{{StockP}}"  required>
+            </div>
+            <!-- Cantidad de consolas -->
+            <div *ngIf="Bzapatol" >
+              <input type="number" class="form-control" id="stock" [(ngModel)]="StockP" name="stock" value="{{StockP}}"  required>
+            </div>
+          </div>
+      </div>
+      <div class="form-row">
+
+        <div class=" col-12 col-md-12  mb-3">
+          <label for="tallas">Talla</label>
+          <input type="number" class="form-control" id="tallas" min="1" max="20"   [(ngModel)]="TallasP" name="TallasP" value="{{TallasP}}"  required>
+
+        </div>
+
+        <div class=" col-12 col-md-12  mb-3">
+          <label for="Genero">Genero</label>
+          <select required id="Genero" ngModel name="genero"   class="form-control">
+              <option selected>Seleccionar</option>
+              <option value="F" >Hombre</option>
+              <option value="M">Mujer</option>
+
+            </select>
+
+        </div>
+
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit"  class="btn btn-primary">Guardar cambios</button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

@@ -28,7 +28,66 @@ app.get('/',(req,res)=>{
 
     })
 
+}); 
+
+app.put('/:id/:stock',(req,res)=>{
+
+    var id = req.params.id;
+    var stock = req.params.stock;
+    
+    
+    console.log(id)
+    consola.findOne({_id:id},(err,consolas)=>{
+        console.log(consolas)
+
+        if (err){
+            return   res.status(404).json({
+                   status:false,
+                   mensaje:"No se encontro el documento",
+                   err
+               })
+           }
+
+           total = consolas.stock-stock;
+
+           if (total<0){
+
+            return   res.status(403).json({
+                status:false,
+                mensaje:"Ya se agotaron los articulos",
+                err
+            })
+
+           }
+           consola.findOneAndUpdate({_id:id},{stock:total},(err,consolas)=>{
+               
+            console.log(total);
+
+                if (err){
+                    return   res.status(404).json({
+                        status:false,
+                        mensaje:"Error al traer los datos",
+                        err
+                    })
+                }
+
+                
+                
+                return res.status(200).json({
+
+                    status:true,
+                    mensaje:"datos actualizados",
+                    consolas          
+        
+                })
+
+           });
+
+           
+    });
+
 });
+
 
 //guardar datos
 app.post('/',(req,res)=>{

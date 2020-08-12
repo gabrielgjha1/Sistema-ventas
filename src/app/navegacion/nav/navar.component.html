@@ -19,36 +19,35 @@
               <i class="fas fa-store"></i>  Articulos
             </a>
             <div class="dropdown-menu elementos animated animate__fadeInDown " aria-labelledby="navbarDropdownMenuLink ">
-              <a class="dropdown-item text-white " [routerLink]="['/zapatos']" routerLinkActive="router-link-active"  href="#">Zapatos</a>
-              <a class="dropdown-item text-white " [routerLink]="['/consolas']" routerLinkActive="router-link-active"  href="#">Consolas</a>
-              <a class="dropdown-item text-white " [routerLink]="['/ropa']" routerLinkActive="router-link-active"  href="#">Ropa</a>
+              <a class="dropdown-item text-white " [routerLink]="['/zapatos']" routerLinkActive="router-link-active"  >Zapatos</a>
+              <a class="dropdown-item text-white " [routerLink]="['/consolas']" routerLinkActive="router-link-active"  >Consolas</a>
+              <a class="dropdown-item text-white " [routerLink]="['/ropa']" routerLinkActive="router-link-active"  >Ropa</a>
             </div>
           </li>
-          
-            <li class="nav-item text-white">
-              <a class="nav-link text-white" [routerLink]="['/agproductos']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-plus"></i> Agregar productos</a>
-            </li>
 
+            <ng-container *ngIf="mostrar">
+
+              <li class="nav-item text-white"  *ngFor="let item of menuAdmin">
+                <a class="nav-link text-white" [routerLink]="[item.ruta]" routerLinkActive="router-link-active"  > <i class="{{item.icono}}"></i> {{item.titulo}}</a>
+              </li>
+
+            </ng-container>
             
-            <li class="nav-item text-white ">
-              <a class="nav-link text-white" [routerLink]="['/perfil']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-user-tie"></i> Perfil</a>
-            </li>
-            <li class="nav-item text-white ">
-              <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-registered mr-1"></i>Login/registro</a>
-            </li>
-            <li class="nav-item text-white">
-              <a class="nav-link text-white" [routerLink]="['/']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-cart-arrow-down"></i>Carrito</a>
-            </li>
-            <li class="nav-item text-white">
-              <a class="nav-link text-white" [routerLink]="['/agproductos']" routerLinkActive="router-link-active"  href="#"> <i class="fas fa-sign-out-alt"></i> Salir</a>
-            </li>
-         
-            <div class="ml-5">
+          
 
-              <form class="form-inline ">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-              </form>
+            <li class="nav-item text-white ">
+              <a class="nav-link text-white" [routerLink]="['/login']" routerLinkActive="router-link-active" > <i class="fas fa-registered mr-1"></i>Login/registro</a>
+            </li>
+           
+            <li class="nav-item text-white">
+              <a class="nav-link text-white" *ngIf="Logeado"  (click)="salir()"  > <i class="fas fa-sign-out-alt"></i> Salir</a>
+            </li>
+            
+         
+            <div class="" *ngIf="this.Logeado">
+              <li class="nav-item text-white">
+              <span class="nav-link text-white"> Ya esta registrado  <span class="strong" >{{this.usuario.nombre}}</span>  </span> 
+              </li>
             </div>
             
           

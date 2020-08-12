@@ -4,86 +4,94 @@
      </div>
 </div>
 
-<div class="row mb-5 formulario">
+<div class="row mb-5 formulario" *ngIf="SegundoFormulario==false" >
     <div class="col">
 
-        <form #f="ngForm"  (ngSubmit)="Verificar(f.value)" >
+        <form #f="ngForm" ngNativeValidate   (ngSubmit)="Verificar(f)" >
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="nombre">Nombre del producto</label>
-                <input type="text" class="form-control" ngModel name="nombre" id="nombre" placeholder="Nombre del producto">
+                <input type="text" class="form-control" required ngModel name="nombre" id="nombre" placeholder="Nombre del producto">
+
               </div>
               <div class="form-group col-md-6">
                 <label for="precio">Precio</label>
-                <input type="number" name="precio" ngModel class="form-control" id="precio" placeholder="Precio">
+                <input type="number" name="precio" required ngModel class="form-control" id="precio" placeholder="Precio">
+
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12">
                 <label for="producto">Tipo de producto</label>
-                <select id="producto" (ngModelChange)="modelChanged($event)" name="producto" ngModel class="form-control">
+                <select id="producto" (ngModelChange)="modelChanged($event)" required name="producto" ngModel class="form-control">
                   <option selected>Seleccionar</option>
-                  <option  value="ropa" >Ropa</option>
+                  <option  value="ropas" >Ropa</option>
                   <option value="consolas">Consolas</option>
-                  <option value="Zapatos" >Zapatos</option>
+                  <option value="zapatos" >Zapatos</option>
                 </select>
             </div>
-                <div class="form-group  col-md-12" *ngIf="ropa || zapatos" > 
+
+                <div class="form-group   col-md-12" *ngIf="ropa || zapatos" > 
                 <label for="Genero">Genero</label>
-                <select id="Genero" ngModel name="genero"  class="form-control">
+                <select required id="Genero" ngModel name="genero"  class="form-control">
                     <option selected>Seleccionar</option>
-                    <option  value="hombre" >Hombre</option>
-                    <option value="mujer">Mujer</option>
+                    <option  value="F" >Hombre</option>
+                    <option value="M">Mujer</option>
 
                   </select>
                 </div>
               
             
             </div>
+
             <!--  Ropa  -->
             <div class="form-row animated animate__fadeInDown" *ngIf="ropa">
                     <div class="form-group  col-12 col-md-6">
-                        <label for="tallas">Small Cantidad</label>
-                        <input type="number" class="form-control" id="tallas"  name="tallas">
+                        <label for="tallass">Small Cantidad</label>
+                        <input type="number" class="form-control" ngModel id="tallass" name="tallass">
                     </div>
                     <div class="form-group col-12 col-md-6">
                         <label for="tallam">Midium Cantidad</label>
-                        <input type="number" class="form-control" id="tallam" name="tallam">
+                        <input type="number" class="form-control" ngModel id="tallam" name="tallam">
                     </div>
                     <div class="form-group col-12 col-md-6">
                         <label for="tallal">Large Cantidad</label>
-                        <input type="number" class="form-control" id="tallal" name="tallal">
+                        <input type="number" class="form-control" ngModel id="tallal" name="tallal">
                     </div>
                     <div class="form-group col-12 col-md-6">
                       <label for="tallax">Extra Large Cantidad</label>
-                      <input type="number" class="form-control" id="tallax" name="tallax">
+                      <input type="number" class="form-control" ngModel id="tallax" name="tallax">
                   </div>
             
               
             </div>
+
             <!--Consolas  -->
+
             <div class="form-row animated animate__fadeInDown" *ngIf="consolas">
                 <div class="form-group col-md-12 ">
                     <label for="consola">Consola Cantidad</label>
                         <label for="tallas"></label>
-                        <input type="number" class="form-control" id="consola" name="consola">  
+                        <input type="number" class="form-control" ngModel id="consola" name="stock">  
                 </div>
             </div>
-   <!-- zapatos -->
+
+            <!-- zapatos -->
+
             <div class="form-row animated animate__fadeInDown" *ngIf="zapatos">
               <div class="form-group col-md-12 ">
-                  <label for="camtodadz">Zapatos cantidad</label>
+                  <label for="stock">Zapatos cantidad</label>
                       
-                      <input type="number" class="form-control" id="camtodadz" name="camtodadz">  
+                      <input type="number" class="form-control" ngModel id="stock" name="stock">  
               </div>
 
               <div class="form-group col-md-12  ">
                 <label for="tallazapato">Seleccionar talla</label>
-                <select id="tallazapato" name="tallazapato" class="form-control">
+                <select id="tallazapato" name="tallazapato" ngModel class="form-control">
                   <option selected>Seleccionar</option>
                   <option  value="10" >10</option>
                   <option  value="11">11</option>
-                  <option  value="12" >12</option>
+                  <option  value="12">12</option>
                   <option  value="13">13</option>
                   <option  value="14" >14</option>
                   <option  value="15">15</option>
@@ -103,4 +111,19 @@
           </form>
 
     </div>
+</div>
+
+<div class="row mb-5 formulario" *ngIf="SegundoFormulario==true">
+  <div class="col">
+    <form #f2="ngForm" name="formulario2" ngNativeValidate  (ngSubmit)="SubirImagen(f2)"  >
+
+      <label for="imagen"  >Selecciona una imagen </label>
+      <div class="custom-file ">
+     
+        <input (change)="seleccionImage($event.target.files[0])" type="file" class="imagen mt-2" ngModel required name="imagen" id="imagen" >
+        <label class="custom-file-label"   for="imagen">Selecciona una imagen</label>
+      </div>
+      <input type="submit" class="btn btn-success btn-block" >
+    </form>
+  </div>
 </div>

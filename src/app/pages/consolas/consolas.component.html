@@ -1,15 +1,31 @@
 
 <app-banner texto1="Las mejores" texto2="consolas" texto3="de la actualidad" ></app-banner>
 
-<div class="row">
-    <div class="col-4">
-        <div class="card">
-            <img class="card-img-top" src="../../../assets/imagenes/unnamed.png" alt="">
-            <div class="card-body">
-                <h5 class="card-title">Ropa 1</h5>
-                <p class="card-text">Precio</p>
-                <a href="" class="btn btn-outline-primary btn-block" >Comprar</a>
+<div class="row mb-5">
+    <div class="col-md-4 col-sm-6 col-12" *ngFor="let item of consolas">
+        <div class="card mt-5">
+            <img class="card-img-top text-center mx-auto d-block "  src="{{item.img | imagenTraer:'consolas'}}" alt="">
+            <div class="card-body ">
+                <form ngNativeValidate [formGroup]="form" (ngSubmit)="comprar(item._id)" >
+
+                
+                <h5 class="card-title text-center">{{item.nombre}}</h5>
+                <div class="d-flex justify-content-between mt-3">
+                    <p class="card-text font-weight-bold d-inline-block">Precio {{item.precio}}$</p>
+                    <p class="card-text font-weight-bold d-inline-block">Stock {{item.stock}}</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" formControlName="cantidad" id="cantidad" name="cantidad" required class="form-control" min="1" >
+
+                  </div>
+
+                <p class="text-muted mt-0 pt-0 font-smaller small" >cod: {{item.codigo}}</p>
+                <button type="submit"  class="btn btn-outline-primary btn-block" >Comprar</button>
+                
                 <a href="" class="btn btn-outline-success btn-block" >Al carrito</a>
+            </form>
             </div>
         </div>
     </div>

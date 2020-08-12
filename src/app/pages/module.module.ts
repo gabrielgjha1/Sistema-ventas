@@ -7,16 +7,22 @@ import { RopaComponent } from './ropa/ropa.component';
 import { ZapatosComponent } from './zapatos/zapatos.component';
 import { ConsolasComponent } from './consolas/consolas.component';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
+import { ZapatosService } from '../services/zapatos.service';
+import { PipesModule } from '../pipes/pipes.module';
+import { EditarProductosComponent } from './editar-productos/editar-productos.component';
 
 @NgModule({
-  declarations: [ArticulosComponent, PerfilComponent, AgregarProductosComponent, RopaComponent, ZapatosComponent, ConsolasComponent],
+  declarations: [ArticulosComponent, PerfilComponent, AgregarProductosComponent, RopaComponent, ZapatosComponent, ConsolasComponent, EditarProductosComponent],
   exports:[ArticulosComponent, PerfilComponent, AgregarProductosComponent],
   imports: [
     CommonModule,
     FormsModule,
-    ComponentsModule
-  ]
+    ComponentsModule,
+    PipesModule,
+    ReactiveFormsModule
+  ],
+  providers:[ZapatosService]
 })
 export class ModuleModule { }

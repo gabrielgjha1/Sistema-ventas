@@ -4,7 +4,7 @@ var app = express();
 
 app.get('/',(req,res)=>{
 
-    zapato.find({},'nombre codigo precio tallas stock img')
+    zapato.find({},'nombre codigo precio tallas stock img genero')
     
     .exec((err,zapatos)=>{
 
@@ -30,6 +30,65 @@ app.get('/',(req,res)=>{
 });
 
 
+
+app.put('/:id/:stock',(req,res)=>{
+
+    var id = req.params.id;
+    var stock = req.params.stock;
+    
+    
+    console.log(id)
+    zapato.findOne({_id:id},(err,zapatos)=>{
+
+        if (err){
+            return   res.status(404).json({
+                   status:false,
+                   mensaje:"No se encontro el documento",
+                   err
+               })
+           }
+
+         let  total = zapatos.stock-stock;
+
+           if (total<0){
+
+            return   res.status(403).json({
+                status:false,
+                mensaje:"Ya se agotaron los articulos",
+                err
+            })
+
+           }
+           zapato.findOneAndUpdate({_id:id},{stock:total},(err,zapatos)=>{
+               
+            console.log(total);
+
+                if (err){
+                    return   res.status(404).json({
+                        status:false,
+                        mensaje:"No se encontro el documento",
+                        err
+                    })
+                }
+
+                
+                
+                return res.status(200).json({
+
+                    status:true,
+                    mensaje:"datos actualizados",
+                    zapatos         
+        
+                })
+
+           });
+
+           
+    });
+
+});
+
+
 //guardar los datos
 app.post('/',(req,res)=>{
 
@@ -41,6 +100,7 @@ app.post('/',(req,res)=>{
     Zapato.precio=body.precio;
     Zapato.tallas=body.tallas;
     Zapato.stock=body.stock;
+    Zapato.genero=body.genero;
     Zapato.img=body.img
 
     Zapato.save((err,zapatos)=>{

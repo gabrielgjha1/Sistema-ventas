@@ -1,12 +1,35 @@
 
 <app-banner texto1="La mejor" texto2="ropa" texto3="de la actualidad" ></app-banner>
-<div class="row">
-    <div class="col-4">
+<div class="row mb-5">
+    <div class="col-md-4 col-sm-6 col-12" *ngFor="let item of ropas">
         <div class="card">
-            <img class="card-img-top" src="../../../assets/imagenes/unnamed.png" alt="">
+            <img class="card-img-top text-center mx-auto d-block" src="{{item.img | imagenTraer:'ropas'}}" alt="">
             <div class="card-body">
-                <h5 class="card-title">Ropa 1</h5>
-                <p class="card-text">Precio</p>
+              <h5 class="card-title text-center text-uppercase ">{{item.nombre}}</h5>
+             
+              <div class="d-flex justify-content-between mt-3">
+                <p class="card-text font-weight-bold d-inline-block">Precio {{item.precio}}$</p>
+                <p class="card-text font-weight-bold d-inline-block">Stock {{item.stock[cantidad]}}</p>
+              </div>
+                
+
+              <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" id="cantidad" name="cantidad" required class="form-control" min="1" >
+
+              </div>
+
+                <div class="form-group">
+                  <label for="tallas">Seleccionar talla</label>
+                  <select  (change)="AsignarStock($event,item.stock)" class="form-control" name="tallas" id="tallas">
+                    <option selected>Seleccione talla</option>
+                    <option value="S" >S</option>
+                    <option value="M" >M</option>
+                    <option value="L" >L</option>
+                    <option value="XS" >XS</option>
+                  </select>
+                </div>
+                <p class="card-text text-muted small " >cod {{item.codigo}}$</p>
                 <a href="" class="btn btn-outline-primary btn-block" >Comprar</a>
                 <a href="" class="btn btn-outline-success btn-block" >Al carrito</a>
             </div>

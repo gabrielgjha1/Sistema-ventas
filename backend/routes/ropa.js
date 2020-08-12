@@ -5,7 +5,7 @@ var app = express();
 // traer ropas
 app.get('/',(req,res)=>{
 
-    ropa.find({},'nombre codigo precio tallas stock img')
+    ropa.find({},'nombre codigo precio tallas stock img genero')
     
     .exec((err,ropas)=>{
 
@@ -42,6 +42,7 @@ app.post('/',(req,res)=>{
     Ropa.precio=body.precio;
     Ropa.tallas=body.tallas;
     Ropa.stock=body.stock;
+    Ropa.genero=body.genero;
     Ropa.img=body.img
 
     Ropa.save((err,ropas)=>{
